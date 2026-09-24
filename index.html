@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>รายงานสถานการณ์น้ำ | เจ้าพระยา - ป่าสัก</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Thai:wght@400;600;700;800&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.4/chart.umd.min.js"></script>
+<link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+
+<header class="topbar">
+  <div class="topbar__inner">
+    <div class="topbar__title">
+      <span class="topbar__icon">🌊</span>
+      <div>
+        <h1>รายงานสถานการณ์น้ำ</h1>
+        <p>ลุ่มน้ำเจ้าพระยา &amp; ลุ่มน้ำป่าสัก · ข้อมูลจากกรมชลประทาน</p>
+      </div>
+    </div>
+    <div class="topbar__meta">
+      <span id="last-updated">กำลังโหลดข้อมูล...</span>
+      <button id="refresh-btn" title="โหลดข้อมูลใหม่">↻ รีเฟรช</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section id="basins-container" class="basins-grid"></section>
+
+  <section class="storage-section">
+    <h2>ปริมาณน้ำในอ่างเก็บน้ำ/เขื่อนขนาดใหญ่ (ล่าสุด)</h2>
+    <p class="storage-section__hint">ข้อมูลจาก API อ่างเก็บน้ำ/เขื่อน ของกรมชลประทาน (app.rid.go.th) — เปอร์เซ็นต์ปริมาณน้ำเก็บกักเทียบความจุ</p>
+    <div id="storage-table-wrap"></div>
+  </section>
+</main>
+
+<footer>
+  <p>
+    ข้อมูลปริมาณน้ำไหลผ่าน: API โทรมาตรน้ำท่า กรมชลประทาน (SWOC) ·
+    ข้อมูลอ่างเก็บน้ำ/เขื่อน: app.rid.go.th/reservoir/api ·
+    อัปเดตอัตโนมัติทุกวันผ่าน GitHub Actions
+  </p>
+</footer>
+
+<script src="js/config.js"></script>
+<script src="js/app.js"></script>
+</body>
+</html>

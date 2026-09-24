@@ -1,0 +1,40 @@
+name: Update water data
+
+on:
+  schedule:
+    # รันทุกวัน 03:30 UTC = 10:30 เวลาไทย (หลังรอบอัปเดตข้อมูลเขื่อน 10:00 น. ของ RID)
+    - cron: "30 3 * * *"
+  workflow_dispatch: {}   # กดรันเองได้จากแท็บ Actions
+
+permissions:
+  contents: write
+
+jobs:
+  fetch-and-commit:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r scripts/requirements.txt
+
+      - name: Fetch data from RID APIs
+        run: python scripts/fetch_data.py
+
+      - name: Commit updated data
+        run: |
+          git config user.name "water-data-bot"
+          git config user.email "actions@users.noreply.github.com"
+          git add data/
+          if git diff --cached --quiet; then
+            echo "ไม่มีข้อมูลใหม่ ไม่ต้อง commit"
+          else
+            git commit -m "chore: update water data $(date -u +'%Y-%m-%d')"
+            git push
+          fi
